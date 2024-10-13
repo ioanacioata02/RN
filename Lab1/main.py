@@ -129,17 +129,3 @@ def solve(matrix: list[list[float]], vector: list[float]) -> list[float]:
 
 
 print(f"{solve(A, B)=}")
-
-# Bonus
-# Da, fiecare paranteza din formula data a determinantului reprezinta
-# determinantul minorului elementului cu care este inmultita paranteza
-# Deci am putea rescrie formula determinantului ca:
-# det(A) = a11*[(-1)^(1+1)*det(M11)] + a12*[(-1)^(1+2)*det(M12)] + a13*[(-1)^(1+3)*det(M13)]
-
-# Fiecare termen de forma (-1)^(i+j) * det(Mij) reprezinta cofactorul elementului aij.
-# Notam (-1)^(i+j) * det(Mij) cu Cij.
-# Formula determinantului se poate rescrie folosind cofactorii:
-# det(A) = a11*C11 + a12*C12 + a13*C13
-# Astfel, am reusit sa scriem determinantul matricii in functie de cofactor.
-# Acesta relatie se numeste expansiunea Laplace a determinantului.
-# Aici a fost realizata pentru elementele de pe un rand, dar se poate realiza si pe coloana.
