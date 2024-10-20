@@ -48,7 +48,8 @@ def backward(X, Y_true, Y_hat, W, b, learning_rate):
     return W, b
 
 
-def train_perceptron(X_train, Y_train, epochs=50, batch_size=100, learning_rate=0.01, decay_rate=0.9, decay_step=10):
+def train_perceptron(X_train, Y_train, epochs=50, batch_size=100,
+                     learning_rate=0.01, decrease_rate=0.9, decrease_step=10):
     nr_samples, nr_features = X_train.shape
     n_classes = Y_train.shape[1]
 
@@ -56,8 +57,8 @@ def train_perceptron(X_train, Y_train, epochs=50, batch_size=100, learning_rate=
     b = np.zeros(n_classes)
 
     for epoch in range(epochs):
-        if (epoch + 1) % decay_step == 0:
-            learning_rate *= decay_rate
+        if (epoch + 1) % decrease_step == 0:
+            learning_rate *= decrease_rate
 
         indices = np.random.permutation(nr_samples)
         X_train = X_train[indices]
@@ -96,7 +97,7 @@ test_X = normalize(test_X)
 train_Y_one_hot = one_hot_encode(train_Y)
 test_Y_one_hot = one_hot_encode(test_Y)
 
-weigh, bias = train_perceptron(train_X, train_Y_one_hot, epochs=200, batch_size=100, learning_rate=0.01)
+weigh, bias = train_perceptron(train_X, train_Y_one_hot, epochs=200)
 
 Y_pred_test = forward(test_X, weigh, bias)
 test_accuracy = accuracy(Y_pred_test, test_Y_one_hot)
