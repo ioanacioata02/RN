@@ -51,10 +51,10 @@ def backward(X, Y_true, Y_hat, W, b, learning_rate):
 def train_perceptron(X_train, Y_train, epochs=50, batch_size=100,
                      learning_rate=0.01, decrease_rate=0.9, decrease_step=10):
     nr_samples, nr_features = X_train.shape
-    n_classes = Y_train.shape[1]
+    nr_classes = Y_train.shape[1]
 
-    W = np.zeros((nr_features, n_classes))
-    b = np.zeros(n_classes)
+    W = np.zeros((nr_features, nr_classes))
+    b = np.zeros(nr_classes)
 
     for epoch in range(epochs):
         if (epoch + 1) % decrease_step == 0:
@@ -71,10 +71,10 @@ def train_perceptron(X_train, Y_train, epochs=50, batch_size=100,
             Y_pred = forward(X_batch, W, b)
             W, b = backward(X_batch, Y_batch, Y_pred, W, b, learning_rate)
 
-        if epoch % 10 == 0:
-            Y_pred_train = forward(X_train, W, b)
-            loss = cross_entropy_loss(Y_train, Y_pred_train)
-            print(f'Epoch {epoch}, Cross Entropy: {loss}')
+        # if epoch % 10 == 0:
+        #     Y_pred_train = forward(X_train, W, b)
+        #     loss = cross_entropy_loss(Y_train, Y_pred_train)
+        #     print(f'Epoch {epoch}, Cross Entropy: {loss}')
 
     return W, b
 
@@ -97,7 +97,7 @@ test_X = normalize(test_X)
 train_Y_one_hot = one_hot_encode(train_Y)
 test_Y_one_hot = one_hot_encode(test_Y)
 
-weigh, bias = train_perceptron(train_X, train_Y_one_hot, epochs=200)
+weigh, bias = train_perceptron(train_X, train_Y_one_hot, epochs=100)
 
 Y_pred_test = forward(test_X, weigh, bias)
 test_accuracy = accuracy(Y_pred_test, test_Y_one_hot)
