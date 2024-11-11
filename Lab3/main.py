@@ -104,7 +104,7 @@ def backward_propagation(X, y, activations, zs, weights, lambda_reg=0.001):
     return gradient_W, gradient_b
 
 
-def train(X, y, weights, biases, epochs=150, batch_size=128, learning_rate=0.1, lambda_reg=0.0001):
+def train(X, y, weights, biases, epochs=150, batch_size=128, learning_rate=0.1, lambda_reg=0.001):
     for epoch in range(epochs):
         permutation = np.random.permutation(X.shape[0])
         X_shuffled = X[permutation]
